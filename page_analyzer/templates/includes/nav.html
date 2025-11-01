@@ -1,0 +1,17 @@
+<nav style="background-color: #111; padding: 0.75rem 0; margin: 0; width: 100%;">
+  <div style="margin: 0; padding-left: 1rem; padding-right: 0.5rem; max-width: 100%;">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-left: 0; padding-left: 0;">
+      <!-- Логотип — белый текст -->
+      <a href="{{ url_for('index') }}"
+         style="color: #fff; font-size: 1.35rem; font-weight: 500; text-decoration: none; margin: 0; padding: 0;">
+        Анализатор страниц
+      </a>
+
+      <!-- Кнопка "Сайты" — чёрный фон, серый шрифт -->
+      <a href="{{ url_for('show_urls_page') }}"
+         style="background-color: #111; color: #aaa; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; font-size: 0.95rem;">
+        Сайты
+      </a>
+    </div>
+  </div>
+</nav>

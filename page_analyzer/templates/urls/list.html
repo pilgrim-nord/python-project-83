@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="flex-grow-1">
+  <div class="container-lg mt-3">
+    <h1>Сайты</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-nowrap" data-test="urls">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Последняя проверка</th>
+            <th>Код ответа</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for url_check in urls_check %}
+          <tr>
+            <td>{{ url_check.id }}</td>
+            <td><a href="/urls/{{ url_check.id }}">{{ url_check.name }}</a></td>
+            <td>{{ url_check.created_at or '' }}</td>
+            <td>{{ url_check.status_code or '' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+<!--Grok-->
+
+<!--<h1>Сайты</h1>-->
+<!--<table class="table table-striped">-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>URL</th>-->
+<!--            <th>Последняя проверка</th>-->
+<!--            <th>Код ответа</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--        {% for u in urls %}-->
+<!--        <tr>-->
+<!--            <td>{{ u.id }}</td>-->
+<!--            <td><a href="{{ url_for('url', url_id=u.id) }}">{{ u.name }}</a></td>-->
+<!--            <td>{{ u.created_at or '' }}</td>-->
+<!--            <td class="{% if u.status_code == 200 %}table-success{% elif u.status_code >= 400 %}table-danger{% else %}table-warning{% endif %}">-->
+<!--                {{ u.status_code or '—' }}-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        {% else %}-->
+<!--        <tr><td colspan="4" class="text-center">Сайты не добавлены</td></tr>-->
+<!--        {% endfor %}-->
+<!--    </tbody>-->
+<!--</table>-->

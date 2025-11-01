@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS urls (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS url_checks (
+    id SERIAL PRIMARY KEY,
+    url_id BIGINT REFERENCES urls (id) ON DELETE CASCADE NOT NULL,
+    status_code TEXT,
+    h1 TEXT,
+    title TEXT,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE
+    );
