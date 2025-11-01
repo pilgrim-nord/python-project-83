@@ -80,7 +80,7 @@ def add_url():
         else:
             url_id = repo.insert_url(normal_url)
             flash('Страница успешно добавлена', 'success')
-        return redirect(url_for('show_urls_page', url_id=url_id))
+        return redirect(url_for('show_url_page', url_id=url_id))
     finally:
         conn.close()
 
@@ -103,12 +103,12 @@ def check_url_page(url_id):
             response.raise_for_status()
         except requests.RequestException:
             flash('Произошла ошибка при проверке', 'danger')
-            return redirect(url_for('show_urls_page', url_id=url_id))
+            return redirect(url_for('show_url_page', url_id=url_id))
 
         url_info = extract_page_data(response)
         repo.insert_check(url_id, url_info)
         flash('Страница успешно проверена', 'success')
-        return redirect(url_for('show_urls_page', url_id=url_id))
+        return redirect(url_for('show_url_page', url_id=url_id))
     finally:
         conn.close()
 

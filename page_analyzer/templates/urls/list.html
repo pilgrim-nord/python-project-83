@@ -18,7 +18,7 @@
           <tr>
             <td>{{ url_check.id }}</td>
             <td><a href="/urls/{{ url_check.id }}">{{ url_check.name }}</a></td>
-            <td>{{ url_check.created_at or '' }}</td>
+            <td>{{ (url_check.created_at.strftime('%d.%m.%Y') if url_check.created_at else '') }}</td>
             <td>{{ url_check.status_code or '' }}</td>
           </tr>
           {% endfor %}

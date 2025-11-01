@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS url_checks (
     h1 TEXT,
     title TEXT,
     description TEXT,
-    created_at TIMESTAMP WITH TIME ZONE
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );

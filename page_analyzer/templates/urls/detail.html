@@ -17,7 +17,7 @@
           </tr>
           <tr>
             <td>Дата создания</td>
-            <td>{{ url.created_at }}</td>
+            <td>{{ url.created_at.strftime('%d.%m.%Y') }}</td>
           </tr>
         </tbody>
       </table>
@@ -46,7 +46,7 @@
             <td>{{ check.h1 }}</td>
             <td>{{ check.title }}</td>
             <td>{{ check.description }}</td>
-            <td>{{ check.created_at }}</td>
+            <td>{{ check.created_at.strftime('%d.%m.%Y') }}</td>
         </tr>
         {% endfor %}
     </tbody>
