@@ -13,10 +13,8 @@ from .page_checker import extract_page_data
 
 load_dotenv()
 
-# === Создание приложения ===
 app = Flask(__name__)
 
-# Безопасная загрузка конфига
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 DATABASE_URL = os.getenv('DATABASE_URL')
 
@@ -25,8 +23,6 @@ def get_connection():
 
 # Константа для таймаута
 REQUESTS_TIMEOUT = 10
-
-# === Маршруты ===
 
 @app.route('/')
 def index():

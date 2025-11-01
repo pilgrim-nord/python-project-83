@@ -1,7 +1,4 @@
-import psycopg2
 from psycopg2.extras import NamedTupleCursor
-from flask import current_app
-from datetime import datetime, timezone
 from contextlib import contextmanager
 from typing import Optional, List, Dict, Any
 
