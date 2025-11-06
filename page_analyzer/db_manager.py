@@ -18,7 +18,6 @@ class UrlRepository:
                 self.conn.rollback()
                 raise
             finally:
-                # commit/rollback уже сделаны
                 pass
 
     # === URL ===

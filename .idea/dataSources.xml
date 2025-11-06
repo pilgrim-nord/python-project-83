@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/project83</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="render" uuid="f5091145-9fef-4eda-9c3d-355bdba23f90">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://dpg-d3qe7ggdl3ps73bsk6p0-a.oregon-postgres.render.com:5432/project83_qike</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
