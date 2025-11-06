@@ -8,8 +8,8 @@ from flask import (
 from .db_manager import UrlRepository
 from dotenv import load_dotenv
 # from page_analyzer import db_manager as db
-from .utils import validate_url, normalize_url
-from .page_checker import extract_page_data
+from .url_validator import validate_url, normalize_url
+from .parser import extract_page_data
 
 load_dotenv()
 
