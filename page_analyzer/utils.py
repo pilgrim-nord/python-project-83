@@ -1,10 +1,12 @@
 import validators
 from urllib.parse import urlparse
 
+
 def normalize_url(url):
     parsed = urlparse(url)
     scheme = parsed.scheme or 'https'
     return f'{scheme}://{parsed.netloc}'
+
 
 def validate_url(url):
     if not url:

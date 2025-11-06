@@ -18,15 +18,19 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 DATABASE_URL = os.getenv('DATABASE_URL')
 
+
 def get_connection():
     return psycopg2.connect(DATABASE_URL)
+
 
 # Константа для таймаута
 REQUESTS_TIMEOUT = 10
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/urls/')
 def show_urls_page():
@@ -72,14 +76,18 @@ def add_url():
                 existed_url = repo.check_url_exists(normal_url)
                 if existed_url:
                     flash('Страница уже существует', 'info')
-                    return redirect(url_for('show_url_page', url_id=existed_url.id))
+                    return redirect(
+                        url_for(
+                            'show_url_page',
+                            url_id=existed_url.id
+                        )
+                    )
                 else:
                     url_id = repo.insert_url(normal_url)
                     flash('Страница успешно добавлена', 'success')
                     return redirect(url_for('show_url_page', url_id=url_id))
             finally:
                 conn.close()
-
 
     flash(error, 'danger')
 
@@ -91,6 +99,7 @@ def add_url():
         conn.close()
 
     return render_template('index.html', url=raw_url, urls=urls), 422
+
 
 @app.post('/urls/<int:url_id>/checks/')
 def check_url_page(url_id):
