@@ -56,30 +56,41 @@ def show_url_page(url_id):
 @app.post('/urls/')
 def add_url():
     raw_url = request.form.get('url', '').strip()
+    error = None
+
     if not raw_url:
-        flash('URL обязателен', 'danger')
-        return render_template('index.html'), 422
+        error = 'URL обязателен'
+    else:
+        normal_url = normalize_url(raw_url)
+        validation_error = validate_url(normal_url)
+        if validation_error:
+            error = validation_error
+        else:
+            conn = get_connection()
+            try:
+                repo = UrlRepository(conn)
+                existed_url = repo.check_url_exists(normal_url)
+                if existed_url:
+                    flash('Страница уже существует', 'info')
+                    return redirect(url_for('show_url_page', url_id=existed_url.id))
+                else:
+                    url_id = repo.insert_url(normal_url)
+                    flash('Страница успешно добавлена', 'success')
+                    return redirect(url_for('show_url_page', url_id=url_id))
+            finally:
+                conn.close()
 
-    normal_url = normalize_url(raw_url)
-    validation_error = validate_url(normal_url)
-    if validation_error:
-        flash(validation_error, 'danger')
-        return render_template('index.html', url=raw_url), 422
-
+    # ← Только сюда попадаем при ошибках валидации
+    flash(error, 'danger')
+    # Важно: передаём все переменные, которые ожидает index.html
     conn = get_connection()
     try:
         repo = UrlRepository(conn)
-        existed_url = repo.check_url_exists(normal_url)
-        if existed_url:
-            flash('Страница уже существует', 'info')
-            url_id = existed_url.id
-        else:
-            url_id = repo.insert_url(normal_url)
-            flash('Страница успешно добавлена', 'success')
-        return redirect(url_for('show_url_page', url_id=url_id))
+        urls = repo.get_urls_with_last_check()
     finally:
         conn.close()
 
+    return render_template('index.html', url=raw_url, urls=urls), 422
 
 @app.post('/urls/<int:url_id>/checks/')
 def check_url_page(url_id):
