@@ -53,7 +53,7 @@ def show_url_page(url_id):
         conn.close()
 
 
-@app.post('/urls/')
+@app.post('/urls')
 def add_url():
     raw_url = request.form.get('url', '').strip()
     error = None
@@ -80,9 +80,9 @@ def add_url():
             finally:
                 conn.close()
 
-    # ← Только сюда попадаем при ошибках валидации
+
     flash(error, 'danger')
-    # Важно: передаём все переменные, которые ожидает index.html
+
     conn = get_connection()
     try:
         repo = UrlRepository(conn)
